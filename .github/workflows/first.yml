@@ -1,10 +1,10 @@
-name: myfirstworkflow
+name : myfirstworkflow
 
-on: workflow_dispatch
+on : workflow_dispatch
 
-jobs: 
-   firstjob:
-     runs-on: ubuntu_latest
-     steps:
-      name: print a message
-      runs: echo "this is sagar"
+jobs : 
+   firstjob :
+     runs-on : ubuntu_latest
+     steps :
+      name : print a message
+      runs : echo "this is sagar"
