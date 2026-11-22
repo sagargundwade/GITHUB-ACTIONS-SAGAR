@@ -6,5 +6,4 @@ jobs :
    firstjob :
      runs-on : ubuntu_latest
      steps :
-      -name : print a message
       run : echo "this is sagar"
