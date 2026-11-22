@@ -4,7 +4,7 @@ on : workflow_dispatch
 
 jobs : 
    firstjob :
-     runs-on : ubuntu-latest
+     runs-on : ubuntu_latest
      steps :
-       name : print a message
-       runs : echo "this is sagar"
+      name : print a message
+      runs : echo "this is sagar"
