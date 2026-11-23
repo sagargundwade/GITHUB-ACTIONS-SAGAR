@@ -1,10 +1,19 @@
-name : myfirstworkflow
+name : build and push
 
 on : workflow_dispatch
 
 jobs : 
-   firstjob :
+   build and push :
      runs-on : ubuntu-latest
      steps :
-       - name:  print a message
-         run :  echo "this is sagar"
+       - name:  putting code on runner
+         run :  git clone https://github.com/sagargundwade/GITHUB-ACTIONS-SAGAR.git
+
+       - name: build docker image   
+         run: |
+           cd  GITHUB-ACTIONS-SAGAR/.github/workflows
+           docker build myimage .
+       - name: login to docker hub
+         run: echo $ {{secrets.dockerhub_password}} | docker login -u {{var.dockerhub_username}} --password-stdin
+
+
