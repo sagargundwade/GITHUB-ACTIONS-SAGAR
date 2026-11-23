@@ -18,6 +18,6 @@ jobs :
        
        - name: tag and push
          run:  |
-           docker tag myimage:latest ${{vars.DOCKERHUB_USERNAME}}/newrepo:latest
+           docker tag myimage:latest ${{vars.DOCKERHUB_USERNAME}}/practice:v1
            docker push ${{secrets.DOCKERHUB_USERNAME}}/newrepo:latest
 
