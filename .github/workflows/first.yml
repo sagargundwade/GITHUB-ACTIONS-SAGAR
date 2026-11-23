@@ -3,7 +3,7 @@ name : build and push
 on : workflow_dispatch
 
 jobs : 
-   build and push :
+   buildandpush :
      runs-on : ubuntu-latest
      steps :
        - name:  putting code on runner
