@@ -14,6 +14,6 @@ jobs :
            cd  GITHUB-ACTIONS-SAGAR/.github/workflows
            docker build -t myimage .
        - name: login to docker hub
-         run: echo $ {{secrets.DOCKERHUB_PASSWORD}} | docker login -u ${{var.DOCKERHUB_USERNAME}} --password-stdin
+         run: echo $ {{secrets.DOCKERHUB_PASSWORD}} | docker login -u ${{vars.DOCKERHUB_USERNAME}} --password-stdin
 
 
