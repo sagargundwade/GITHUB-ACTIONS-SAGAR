@@ -1,8 +1,0 @@
-from ubuntu:latest
-
-run apt update 
-run apt install -y apache2
-
-expose 80
-
-cmd ["apachectl","-d"]
