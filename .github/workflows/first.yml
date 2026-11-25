@@ -4,14 +4,14 @@ on : workflow_dispatch
 
 jobs : 
    buildandpush :
-     runs-on : [self-hosted, prod]
+     runs-on : ubuntu-latest
      steps :
        - name:  putting code on runner
          run :  git clone https://github.com/sagargundwade/GITHUB-ACTIONS-SAGAR.git
 
        - name: build docker image   
          run: |
-           cd  GITHUB-ACTIONS-SAGAR/.github/workflows
+           cd  GITHUB-ACTIONS-SAGAR/
            docker build -t myimage .
        - name: login to docker hub
          run: echo ${{secrets.DOCKERHUB_PASSWORD}} | docker login -u ${{vars.DOCKERHUB_USERNAME}} --password-stdin
