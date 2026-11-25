@@ -6,10 +6,7 @@ jobs :
    buildandpush :
      runs-on : self-hosted
      steps :
-       - name: remove existing dir 
-         run:  |
-                cd _work/ 
-                rm -rf GITHUB-ACTIONS-SAGAR
+        
        - name:  putting code on runner
          run :  git clone https://github.com/sagargundwade/GITHUB-ACTIONS-SAGAR.git
 
