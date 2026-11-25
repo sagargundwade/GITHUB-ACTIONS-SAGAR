@@ -4,7 +4,7 @@ on : workflow_dispatch
 
 jobs : 
    buildandpush :
-     runs-on : ubuntu-latest
+     runs-on : self-hosted
      steps :
        - name:  putting code on runner
          run :  git clone https://github.com/sagargundwade/GITHUB-ACTIONS-SAGAR.git
