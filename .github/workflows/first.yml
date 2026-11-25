@@ -7,8 +7,8 @@ jobs :
      runs-on : self-hosted
      steps :
         
-       - name:  putting code on runner
-         run :  git clone https://github.com/sagargundwade/GITHUB-ACTIONS-SAGAR.git
+       - name: Checkout code
+         uses: actions/checkout@v4
 
        - name: build docker image   
          run: |
