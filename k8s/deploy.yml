@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: b17-deployment
+  labels:
+    app: b17
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: b17
+
+  template:
+    metadata:
+      labels:
+        app: b17
+
+    spec:
+      containers:
+        - name: b17-container
+          image: uri/b17:latest
+          ports:
+            - containerPort: 80

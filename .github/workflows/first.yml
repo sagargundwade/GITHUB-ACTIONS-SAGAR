@@ -1,24 +1,42 @@
-name : build and push
+name: build and push
 
-on : workflow_dispatch
+on: workflow_dispatch
 
-jobs : 
-   buildandpush :
-     runs-on : self-hosted
-     steps :
-        
-       - name: Checkout code
-         uses: actions/checkout@v4
+jobs:
+  buildandpush:
+    runs-on: ubuntu-latest
 
-       - name: build docker image   
-         run:  docker build -t myimage .
-         
-       - name: login to docker hub
-         run: echo ${{secrets.DOCKERHUB_PASSWORD}} | docker login -u ${{vars.DOCKERHUB_USERNAME}} --password-stdin
-       
-       - name: tag and push
-         run:  |
-           docker images
-           docker tag myimage:latest ${{vars.DOCKERHUB_USERNAME}}/practice:v1
-           docker push ${{vars.DOCKERHUB_USERNAME}}/practice:v1
+    steps:
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: AWS configure
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Login to ECR
+        run: |
+          aws ecr get-login-password --region ap-south-1 | \
+          docker login --username AWS --password-stdin 712493797756.dkr.ecr.ap-south-1.amazonaws.com
+
+      - name: Build and push
+        run: |
+          docker build -t712493797756.dkr.ecr.ap-south-1.amazonaws.com/ecrsagar:latest .
+          docker push 712493797756.dkr.ecr.ap-south-1.amazonaws.com/ecrsagar:latest
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'latest'
+
+      - name: Configure kubectl
+        run: aws eks update-kubeconfig --region ap-south-1 --name k8s-sagar
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/deploy.yml
+          kubectl apply -f k8s/service.yml
